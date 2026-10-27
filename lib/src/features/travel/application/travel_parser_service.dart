@@ -372,6 +372,36 @@ class SETCBusParser extends TravelTicketParser {
   }
 }
 
+class RedBusParser extends TravelTicketParser {
+  new({required this._logger});
+
+  final ILogger _logger;
+  @override
+  bool canParse(String text) {
+    return text.toLowerCase().contains('redbus');
+  }
+
+  @override
+  bool isSMSFormat(String text) {
+    // TODO: implement isSMSFormat
+    throw UnimplementedError();
+  }
+
+  @override
+  Ticket parseTicket(String text) {
+    // TODO: implement parseTicket
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement providerName
+  String get providerName => throw UnimplementedError();
+
+  @override
+  // TODO: implement ticketType
+  TicketType get ticketType => throw UnimplementedError();
+}
+
 class TravelParserService implements ITravelParser {
   TravelParserService({required ILogger logger})
     : _logger = logger,
@@ -379,6 +409,7 @@ class TravelParserService implements ITravelParser {
         SETCBusParser(logger: logger),
         TNSTCBusParser(logger: logger),
         IRCTCTrainParser(logger: logger),
+        RedBusParser(logger: logger),
       ];
   final ILogger _logger;
   final List<TravelTicketParser> _parsers;
